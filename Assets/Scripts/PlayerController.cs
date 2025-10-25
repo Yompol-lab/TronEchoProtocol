@@ -73,7 +73,6 @@ public class PlayerControllerRB : MonoBehaviour
     void CambiarAMoto()
     {
         if (motoConPersonaje == null) return;
-
         StartCoroutine(ActivarMotoConDelay());
     }
 
@@ -81,30 +80,27 @@ public class PlayerControllerRB : MonoBehaviour
     {
         Rigidbody rb = motoConPersonaje.GetComponent<Rigidbody>();
         if (rb != null)
-            rb.isKinematic = true; // ✋ detener física temporalmente
+            rb.isKinematic = true;
 
-        // Posicionar la moto un poco adelante y abajo para evitar colisión
+        // Separación para evitar colisiones
         Vector3 offset = transform.forward * 1.5f + Vector3.down * 0.5f;
         motoConPersonaje.transform.position = transform.position + offset;
 
-        // Corregir rotación (Y del jugador + ajuste modelo)
-        Quaternion baseRot = Quaternion.Euler(0, transform.eulerAngles.y, 0);
-        Quaternion fixRot = Quaternion.Euler(-90f, 0, 0);
-        motoConPersonaje.transform.rotation = baseRot * fixRot;
+        // ROTACIÓN FIJA PARA MODELOS QUE MIRAN AL SUELO
+        Quaternion fixedRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * Quaternion.Euler(-90f, 0f, 0f);
+        motoConPersonaje.transform.rotation = fixedRotation;
 
-        // Activar la moto
         motoConPersonaje.SetActive(true);
 
-        // Esperar 1 frame
         yield return null;
 
-        // Rehabilitar física
         if (rb != null)
             rb.isKinematic = false;
 
-        // Ocultar jugador
         gameObject.SetActive(false);
     }
+
+
 
 
 

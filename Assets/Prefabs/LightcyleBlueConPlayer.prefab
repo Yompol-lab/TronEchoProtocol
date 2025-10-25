@@ -262,13 +262,14 @@ GameObject:
   - component: {fileID: 1762886844411215523}
   - component: {fileID: 7267187533040709874}
   - component: {fileID: 9160081767689322355}
+  - component: {fileID: 4664378854638641122}
   m_Layer: 0
   m_Name: LightcyleBlueConPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1762886844411215523
 Transform:
   m_ObjectHideFlags: 0
@@ -277,14 +278,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385536830099865823}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.7, y: 0, z: -4.84}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.55131334, y: 2.677333, z: -6.6052947}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5153615425200120456}
+  - {fileID: 8543274250201516882}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &7267187533040709874
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -346,6 +348,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4664378854638641122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385536830099865823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8dc27864da2e0d45ab859c4b8eec3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightCycleController
+  maxSpeed: 26.39
+  acceleration: 20
+  deceleration: 25
+  turnSpeed: 50
+  forwardReference: {fileID: 0}
+  visualModel: {fileID: 1762886844411215523}
+  tiltAmount: 15
+  tiltSmooth: 5
 --- !u!1 &561218351578290240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,6 +2049,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6720921275473531266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7045911305902140236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8543274250201516882}
+  m_Layer: 0
+  m_Name: Punto adelante
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8543274250201516882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045911305902140236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: -0.0000005875315, y: -0.39000058, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1762886844411215523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!1 &7130243850909809645
 GameObject:
   m_ObjectHideFlags: 0

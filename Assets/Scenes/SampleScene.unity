@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &267986109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267986110}
+  m_Layer: 0
+  m_Name: ForwardReference
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &267986110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267986109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.549, z: 0.035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 202983706246574138}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &274319142 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6253129786998131689, guid: 044093a51f7714942aa4af86176f62a2, type: 3}
@@ -1663,7 +1694,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LightCycleController
   maxSpeed: 26.39
   acceleration: 50
+  deceleration: 25
   turnSpeed: 90
+  forwardReference: {fileID: 267986110}
+  visualModel: {fileID: 202983706246574138}
+  tiltAmount: 15
+  tiltSmooth: 5
+--- !u!54 &4010373455599082741
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010373455599082735}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!65 &4010373455599082742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010373455599082735}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1378092, y: 0.26045895, z: 0.099587634}
+  m_Center: {x: -0.000000029802322, y: -0.0063305, z: 0.0487175}
 --- !u!1001 &4038845607770112749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1777,13 +1861,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4664378854638641122, guid: f43a8db70c5bae64399928dc41a4694c, type: 3}
+      propertyPath: forwardReference
+      value: 
+      objectReference: {fileID: 267986110}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1762886844411215523, guid: f43a8db70c5bae64399928dc41a4694c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 267986110}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 385536830099865823, guid: f43a8db70c5bae64399928dc41a4694c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4010373455599082738}
+    - targetCorrespondingSourceObject: {fileID: 385536830099865823, guid: f43a8db70c5bae64399928dc41a4694c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4010373455599082742}
+    - targetCorrespondingSourceObject: {fileID: 385536830099865823, guid: f43a8db70c5bae64399928dc41a4694c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4010373455599082741}
   m_SourcePrefab: {fileID: 100100000, guid: f43a8db70c5bae64399928dc41a4694c, type: 3}
 --- !u!1001 &5209747423255533678
 PrefabInstance:
