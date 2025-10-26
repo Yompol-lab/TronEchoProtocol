@@ -994,6 +994,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1651656426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1651656428}
+  - component: {fileID: 1651656427}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1651656427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651656426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd72cd863f134241b9d83fe895d026b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  motos:
+  - nombre: Blue
+    prefab: {fileID: 3755867221913359222, guid: 8b4b088a48343424e808467ef7311b5e, type: 3}
+    cantidad: 5
+  - nombre: White
+    prefab: {fileID: 2180271818500522961, guid: 7cb9de4a7b427e643a0856f7f1d60d63, type: 3}
+    cantidad: 5
+  - nombre: Orange
+    prefab: {fileID: 6641463174800790639, guid: 4d6a9108e492908428a82d7340c49b2d, type: 3}
+    cantidad: 5
+  - nombre: Red
+    prefab: {fileID: 6641463174800790639, guid: 62bdec3e8129f77458c63b74fb259cfe, type: 3}
+    cantidad: 5
+  - nombre: Yellow
+    prefab: {fileID: 1589291855748842458, guid: e21602285a31f284ca7b926b0ec4152e, type: 3}
+    cantidad: 5
+--- !u!4 &1651656428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651656426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.00593, y: -0.04, z: -4.98942}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881212772
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,3 +2256,4 @@ SceneRoots:
   - {fileID: 558122265}
   - {fileID: 1929038601}
   - {fileID: 1881212774}
+  - {fileID: 1651656428}

@@ -72,9 +72,12 @@ public class PlayerControllerRB : MonoBehaviour
 
     void CambiarAMoto()
     {
-        GameObject moto = ObjectPool.Instance.GetMoto();
+        string tipoMoto = "Blue"; 
+        GameObject moto = ObjectPool.Instance.GetMoto(tipoMoto);
+
         moto.transform.position = transform.position + transform.forward * 2f;
         GameManager.Instance.NotifyVehicleChange(true);
         gameObject.SetActive(false);
     }
+
 }

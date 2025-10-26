@@ -4,32 +4,50 @@ using System.Collections.Generic;
 public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool Instance;
-    [SerializeField] private GameObject motoPrefab;
-    [SerializeField] private int poolSize = 3;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
+    [System.Serializable]
+    public class Pool
+    {
+        public string nombre;
+        public GameObject prefab;
+        public int cantidad;
+    }
+
+    [Header("Lista de Motos")]
+    public List<Pool> motos = new List<Pool>();
+
+    private Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     void Awake()
     {
-        Instance = this;
-        for (int i = 0; i < poolSize; i++)
+        if (Instance == null) Instance = this;
+
+        foreach (Pool pool in motos)
         {
-            GameObject moto = Instantiate(motoPrefab);
-            moto.SetActive(false);
-            pool.Enqueue(moto);
+            Queue<GameObject> cola = new Queue<GameObject>();
+
+            for (int i = 0; i < pool.cantidad; i++)
+            {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
+                cola.Enqueue(obj);
+            }
+
+            poolDictionary.Add(pool.nombre, cola);
         }
     }
 
-    public GameObject GetMoto()
+    public GameObject GetMoto(string nombre)
     {
-        GameObject moto = pool.Count > 0 ? pool.Dequeue() : Instantiate(motoPrefab);
-        moto.SetActive(true);
-        return moto;
-    }
+        if (!poolDictionary.ContainsKey(nombre))
+        {
+            Debug.LogWarning("No existe el pool para: " + nombre);
+            return null;
+        }
 
-    public void ReturnMoto(GameObject moto)
-    {
-        moto.SetActive(false);
-        pool.Enqueue(moto);
+        GameObject obj = poolDictionary[nombre].Dequeue();
+        obj.SetActive(true);
+        poolDictionary[nombre].Enqueue(obj);
+        return obj;
     }
 }
