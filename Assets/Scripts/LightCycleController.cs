@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class LightCycleController : MonoBehaviour
 {
     [Header("Movimiento")]
-    public float maxSpeed = 26.39f;        // 95 km/h
+    public float maxSpeed = 26.39f;    
     public float acceleration = 20f;
     public float deceleration = 25f;
     public float turnSpeed = 50f;
 
     [Header("Referencias")]
-    public Transform forwardReference;  // Objeto hijo que apunta hacia Z+
-    public Transform visualModel;       // Mesh visual de la moto
+    public Transform forwardReference; 
+    public Transform visualModel;     
 
     [Header("Estética de inclinación")]
-    public float tiltAmount = 15f;      // Cuánto inclina al doblar (visual)
-    public float tiltSmooth = 5f;       // Suavidad de la inclinación
+    public float tiltAmount = 15f;
+    public float tiltSmooth = 5f;
 
     private Rigidbody rb;
     private float currentSpeed = 0f;
@@ -24,12 +25,25 @@ public class LightCycleController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        
+        if (forwardReference == null)
+            forwardReference = transform;
+
+       
+        Vector3 euler = transform.eulerAngles;
+        transform.rotation = Quaternion.Euler(0f, euler.y, 0f);
+
+        
+        rb.linearDamping = 0.5f;
+        rb.angularDamping = 2f;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     void Update()
     {
-        inputVertical = Input.GetAxis("Vertical");     // W/S
-        inputHorizontal = Input.GetAxis("Horizontal"); // A/D
+        inputVertical = Input.GetAxis("Vertical");   
+        inputHorizontal = Input.GetAxis("Horizontal"); 
     }
 
     void FixedUpdate()
@@ -39,8 +53,10 @@ public class LightCycleController : MonoBehaviour
         InclinarVisual();
     }
 
+    
     void Mover()
     {
+       
         if (Mathf.Abs(inputVertical) > 0.1f)
         {
             currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed * Mathf.Sign(inputVertical), acceleration * Time.fixedDeltaTime);
@@ -50,25 +66,28 @@ public class LightCycleController : MonoBehaviour
             currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.fixedDeltaTime);
         }
 
+       
         Vector3 dir = forwardReference.forward;
-        dir = new Vector3(dir.x, 0f, dir.z).normalized; // Plano XZ
+        dir.y = 0f;
+        dir.Normalize();
 
-        Vector3 velocity = dir * currentSpeed;
-        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+       
+        Vector3 move = dir * currentSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + move);
     }
 
+   
     void Girar()
     {
-        // Solo girar si hay velocidad
         if (Mathf.Abs(currentSpeed) > 1f && Mathf.Abs(inputHorizontal) > 0.1f)
         {
-            float turnFactor = Mathf.Lerp(0.3f, 1f, Mathf.Abs(currentSpeed) / maxSpeed);
-            float rotation = inputHorizontal * turnSpeed * turnFactor * Time.fixedDeltaTime;
+            float rotation = inputHorizontal * turnSpeed * Time.fixedDeltaTime;
             Quaternion deltaRot = Quaternion.Euler(0f, rotation, 0f);
             rb.MoveRotation(rb.rotation * deltaRot);
         }
     }
 
+    
     void InclinarVisual()
     {
         if (visualModel == null) return;

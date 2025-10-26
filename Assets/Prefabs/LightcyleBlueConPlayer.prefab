@@ -263,6 +263,9 @@ GameObject:
   - component: {fileID: 7267187533040709874}
   - component: {fileID: 9160081767689322355}
   - component: {fileID: 4664378854638641122}
+  - component: {fileID: -1852376146517700396}
+  - component: {fileID: -9049520448809165425}
+  - component: {fileID: 7720494992633260405}
   m_Layer: 0
   m_Name: LightcyleBlueConPlayer
   m_TagString: Untagged
@@ -278,15 +281,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385536830099865823}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.55131334, y: 2.677333, z: -6.6052947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75936675, y: 3.136262, z: -6.232054}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5153615425200120456}
   - {fileID: 8543274250201516882}
+  - {fileID: 5153615425200120456}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7267187533040709874
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -364,10 +367,72 @@ MonoBehaviour:
   acceleration: 20
   deceleration: 25
   turnSpeed: 50
-  forwardReference: {fileID: 0}
+  forwardReference: {fileID: 8543274250201516882}
   visualModel: {fileID: 1762886844411215523}
   tiltAmount: 15
   tiltSmooth: 5
+--- !u!114 &-1852376146517700396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385536830099865823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917a8e2e982eae641b9a29c20858eed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MotoSwitcher
+  playerPrefab: {fileID: 6253129786998131689, guid: 044093a51f7714942aa4af86176f62a2, type: 3}
+  exitDistance: 0
+--- !u!54 &-9049520448809165425
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385536830099865823}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7720494992633260405
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385536830099865823}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.083565004, y: 0.26045907, z: 0.09958768}
+  m_Center: {x: 0.000050195627, y: -0.0063304985, z: 0.04871752}
 --- !u!1 &561218351578290240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,8 +2138,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7045911305902140236}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: -0.0000005875315, y: -0.39000058, z: 0}
+  m_LocalRotation: {x: -0.00000014621759, y: -0.00000017881385, z: -1, w: -0.00000003352761}
+  m_LocalPosition: {x: 0, y: -0.39000046, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -79,10 +79,15 @@ public class PlayerControllerRB : MonoBehaviour
         GameObject moto = ObjectPool.Instance.GetMoto(motoID);
         if (moto == null) return;
 
+        
         moto.transform.position = transform.position + transform.forward * 2f;
-        moto.transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+
+        
+        moto.transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
 
         GameManager.Instance.NotifyVehicleChange(true);
         gameObject.SetActive(false);
     }
+
+
 }
