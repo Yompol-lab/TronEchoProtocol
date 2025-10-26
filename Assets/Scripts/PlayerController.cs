@@ -1,5 +1,7 @@
-﻿using UnityEngine;
-
+﻿using System.Windows.Input;
+using UnityEngine;
+using UnityEngine.Playables;
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerControllerRB : MonoBehaviour
 {
     [Header("Movimiento")]
@@ -7,102 +9,72 @@ public class PlayerControllerRB : MonoBehaviour
     public float runSpeed = 10f;
     public float jumpForce = 7f;
 
-    [Header("Moto")]
-    public GameObject motoConPersonaje;
-
     private Rigidbody rb;
-    private bool isGrounded = true;
+    public bool IsGrounded { get; private set; } = true;
+
+    private PlayerState currentState;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        //  Congela rotaciones para evitar caídas
         rb.freezeRotation = true;
-
-        if (motoConPersonaje != null)
-            motoConPersonaje.SetActive(false);
+        ChangeState(new WalkingState());
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            CambiarAMoto();
-            return;
-        }
+        currentState.Update(this);
 
-        Mover();
-        Saltar();
+        if (Input.GetKeyDown(KeyCode.F))
+            CambiarAMoto();
     }
 
-    void Mover()
+    public void ChangeState(PlayerState newState)
+    {
+        currentState = newState;
+        currentState.Enter(this);
+    }
+
+    public void HandleMovement()
+    {
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        ICommand move = new MoveCommand(moveInput);
+        move.Execute(this);
+    }
+
+    public void Move(Vector2 input)
     {
         float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
-
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
-
-        Vector3 move = transform.forward * moveZ + transform.right * moveX;
-        Vector3 newVelocity = new Vector3(move.x * speed, rb.velocity.y, move.z * speed);
-
-        rb.velocity = newVelocity;
+        Vector3 move = transform.forward * input.y + transform.right * input.x;
+        Vector3 newVelocity = new Vector3(move.x * speed, rb.linearVelocity.y, move.z * speed);
+        rb.linearVelocity = newVelocity;
     }
 
-    void Saltar()
+    public void PerformJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // reset vertical
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
-        }
+        if (!IsGrounded) return;
+        ICommand jump = new JumpCommand();
+        jump.Execute(this);
+    }
+
+    public void Jump()
+    {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        IsGrounded = false;
     }
 
     void OnCollisionEnter(Collision other)
     {
-        // Detecta si tocamos el suelo para permitir saltar
-        if (other.contacts.Length > 0)
-        {
-            ContactPoint contact = other.contacts[0];
-            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
-                isGrounded = true;
-        }
+        if (other.contacts.Length > 0 && Vector3.Dot(other.contacts[0].normal, Vector3.up) > 0.5f)
+            IsGrounded = true;
     }
 
     void CambiarAMoto()
     {
-        if (motoConPersonaje == null) return;
-        StartCoroutine(ActivarMotoConDelay());
-    }
-
-    System.Collections.IEnumerator ActivarMotoConDelay()
-    {
-        Rigidbody rb = motoConPersonaje.GetComponent<Rigidbody>();
-        if (rb != null)
-            rb.isKinematic = true;
-
-        // Separación para evitar colisiones
-        Vector3 offset = transform.forward * 1.5f + Vector3.down * 0.5f;
-        motoConPersonaje.transform.position = transform.position + offset;
-
-        // ROTACIÓN FIJA PARA MODELOS QUE MIRAN AL SUELO
-        Quaternion fixedRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * Quaternion.Euler(-90f, 0f, 0f);
-        motoConPersonaje.transform.rotation = fixedRotation;
-
-        motoConPersonaje.SetActive(true);
-
-        yield return null;
-
-        if (rb != null)
-            rb.isKinematic = false;
-
+        GameObject moto = ObjectPool.Instance.GetMoto();
+        moto.transform.position = transform.position + transform.forward * 2f;
+        GameManager.Instance.NotifyVehicleChange(true);
         gameObject.SetActive(false);
     }
-
-
-
-
-
-
 }
