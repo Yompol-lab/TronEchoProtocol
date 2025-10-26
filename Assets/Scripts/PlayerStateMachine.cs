@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public abstract class PlayerState
 {
     public abstract void Enter(PlayerControllerRB player);
@@ -13,7 +11,8 @@ public class WalkingState : PlayerState
     public override void Update(PlayerControllerRB player)
     {
         player.HandleMovement();
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Space))
             player.ChangeState(new JumpingState());
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Windows.Input;
-using UnityEngine;
-using UnityEngine.Playables;
+﻿using UnityEngine;
+
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerControllerRB : MonoBehaviour
 {
@@ -8,6 +7,10 @@ public class PlayerControllerRB : MonoBehaviour
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
     public float jumpForce = 7f;
+
+    [Header("Moto")]
+    [Tooltip("Debe coincidir con el nombre del pool (Blue, Red, etc.)")]
+    public string motoID = "Blue";
 
     private Rigidbody rb;
     public bool IsGrounded { get; private set; } = true;
@@ -18,6 +21,7 @@ public class PlayerControllerRB : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
         ChangeState(new WalkingState());
     }
 
@@ -72,12 +76,13 @@ public class PlayerControllerRB : MonoBehaviour
 
     void CambiarAMoto()
     {
-        string tipoMoto = "Blue"; 
-        GameObject moto = ObjectPool.Instance.GetMoto(tipoMoto);
+        GameObject moto = ObjectPool.Instance.GetMoto(motoID);
+        if (moto == null) return;
 
         moto.transform.position = transform.position + transform.forward * 2f;
+        moto.transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+
         GameManager.Instance.NotifyVehicleChange(true);
         gameObject.SetActive(false);
     }
-
 }

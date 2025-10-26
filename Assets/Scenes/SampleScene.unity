@@ -183,21 +183,6 @@ CapsuleCollider:
   m_Height: 1.1346332
   m_Direction: 1
   m_Center: {x: 0.0071669077, y: 0.51141196, z: -0.05626541}
---- !u!114 &274319146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274319142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613dd67e1f67fec41b729abd3520fd9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  walkSpeed: 5
-  runSpeed: 10
-  jumpForce: 8
 --- !u!54 &274319147
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -225,6 +210,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &274319148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274319142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b88df6e804d0e47bf874e1b9a85b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControllerRB
+  walkSpeed: 2
+  runSpeed: 5
+  jumpForce: 5
+  motoID: Blue
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,7 +2169,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6253129786998131689, guid: 044093a51f7714942aa4af86176f62a2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 274319146}
+      addedObject: {fileID: 274319148}
     - targetCorrespondingSourceObject: {fileID: 6253129786998131689, guid: 044093a51f7714942aa4af86176f62a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 274319144}

@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public event Action<bool> OnVehicleChange; 
+    public event Action<bool> OnVehicleChange;
 
     private void Awake()
     {
