@@ -9,7 +9,6 @@ public class PlayerControllerRB : MonoBehaviour
     public float jumpForce = 7f;
 
     [Header("Moto")]
-    [Tooltip("Debe coincidir con el nombre del pool (Blue, Red, etc.)")]
     public string motoID = "Blue";
 
     private Rigidbody rb;
